@@ -4,9 +4,9 @@ LABEL maintainer="snowdream <sn0wdr1am@qq.com>"
 
 ENV WEBUI_PORT=8080 \
     TORRENTING_PORT=6881 \
-    WEBUI_USER="snowdream" \
-    WEBUI_PASS="ERnf9zM5f" \
-    WEBUI_LANG="zh_CN" 
+    WEBUI_USER="" \
+    WEBUI_PASS="" \
+    WEBUI_LANG="en" 
 
 RUN apk add --no-cache qbittorrent-nox python3 \
     openssl \

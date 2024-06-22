@@ -4,14 +4,58 @@
 
 Docker Image packaging for Qbittorrent. (amd64, arm32v6, arm32v7, arm64v8, i386, ppc64le,riscv64, s390x)
 
-# Run
+# Usage
+
+To help you get started creating a container from this image you can either use docker-compose or the docker cli.
+
+## Docker Cli
 
 ```bash
-docker run --rm snowdreamtech/qbittorrent:latest
+docker run -d \
+  --name=qBittorrent \
+  -e TZ=Etc/UTC \
+  -e WEBUI_LANG=en \
+  -e WEBUI_USER=admin \
+  -e WEBUI_PASS=admin \
+  -e WEBUI_PORT=8080 \
+  -e TORRENTING_PORT=6881 \
+  -p 8080:8080 \
+  -p 6881:6881 \
+  -p 6881:6881/udp \
+  -v /path/to/config:/var/lib/qBittorrent/config \
+  -v /path/to/downloads:/var/lib/qBittorrent/downloads  \
+  -v /path/to/incomplete:/var/lib/qBittorrent/incomplete  \
+  -v /path/to/torrents:/var/lib/qBittorrent/torrents  \
+  --restart unless-stopped \
+  snowdreamtech/qbittorrent:latest
 ```
 
+## Docker Compose
+
 ```bash
-docker run -e TZ=Asia/Shanghai --rm snowdreamtech/qbittorrent:latest
+version: "3"
+
+services:
+  qBittorrent:
+    image: snowdreamtech/qbittorrent:latest
+    container_name: qBittorrent
+    environment:
+      - TZ=Etc/UTC 
+      - WEBUI_LANG=en
+      - WEBUI_USER=admin
+      - WEBUI_PASS=admin 
+      - WEBUI_PORT=8080 
+      - TORRENTING_PORT=6881 
+    volumes:
+      - /path/to/config:/var/lib/qBittorrent/config #optional
+      - /path/to/downloads:/var/lib/qBittorrent/downloads 
+      - /path/to/incomplete:/var/lib/qBittorrent/incomplete 
+      - /path/to/torrents:/var/lib/qBittorrent/torrents 
+    ports:
+      - 8080:8080
+      - 6881:6881
+      - 6881:6881/udp
+    restart: unless-stopped
 ```
 
 # Development
