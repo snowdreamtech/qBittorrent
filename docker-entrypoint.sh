@@ -7,21 +7,8 @@ if [ -n "${WEBUI_USER}" ] && [ -n "${WEBUI_PASS}" ]; then
     sed -i "s/WebUI\\\Username.*/WebUI\\\Username=${WEBUI_USER}/g" /var/lib/qBittorrent/config/qBittorrent.conf
 
     # password
-    # salt https://unix.stackexchange.com/a/230676
-    SALT=$(tr -dc 'A-Za-z0-9!"#$%&'\''()*+,-./:;<=>?@[\]^_`{|}~' </dev/urandom | head -c 16)
-
-    # password https://www.openssl.org/docs/man3.0/man1/openssl-kdf.html
-    HASH=$(openssl kdf -keylen 64 -kdfopt digest:SHA512 -kdfopt pass:"${WEBUI_PASS}" \
-            -kdfopt salt:"${SALT}" -kdfopt iter:100000 PBKDF2)
-
-    # base64
-    ENCODED_SALT=$(echo "${SALT}" | base64)
-    ENCODED_HASH=$(echo "${HASH}" | base64)
-
-    # Format password for qBittorrent
-    QBITTORRENT_HASH="@ByteArray(${ENCODED_SALT}:${ENCODED_HASH})"
-
-    sed -i "s/WebUI\\\Password_PBKDF2.*/WebUI\\\Password_PBKDF2=$(${QBITTORRENT_HASH})/g" /var/lib/qBittorrent/config/qBittorrent.conf
+    HASH=$(python3 /var/lib/qBittorrent/bin/passwd.py "${WEBUI_PASS}")
+    sed -i "s/WebUI\\\Password_PBKDF2.*/WebUI\\\Password_PBKDF2=\"${HASH}\"/g" /var/lib/qBittorrent/config/qBittorrent.conf
 fi
 
 # set WEBUI_LANG
