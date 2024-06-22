@@ -26,6 +26,9 @@ if [ -n "${TORRENTING_PORT}" ]; then
     sed -i "s/Session\\\Port.*/Session\\\Port=${TORRENTING_PORT}/g" /var/lib/qBittorrent/config/qBittorrent.conf
 fi
 
+# flood
+flood --host 0.0.0.0 --port "${FLOOD_PORT}" --auth none --qburl "http://localhost:${WEBUI_PORT}" --qbuser "${WEBUI_USER}" --qbpass "${WEBUI_PASS}" > /dev/null 2>&1 &
+
 # qbittorrent-nox 
 qbittorrent-nox --profile=/var/lib
 

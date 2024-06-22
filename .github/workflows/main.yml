@@ -3,7 +3,7 @@ name: CI Main
 on:
   push:
     branches:
-      - main  
+      - flood  
     tags:
       - '*'
   workflow_dispatch:
@@ -49,15 +49,15 @@ jobs:
           uses: docker/build-push-action@v6.1.0
           with:
             context: .
-            platforms: linux/386,linux/amd64,linux/arm/v6,linux/arm/v7,linux/arm64,linux/ppc64le,linux/riscv64,linux/s390x
+            platforms: linux/386,linux/amd64,linux/arm64,linux/ppc64le,linux/riscv64,linux/s390x
             push: true
             tags: |
-              snowdreamtech/qbittorrent:latest
-              snowdreamtech/qbittorrent:4.6.5
-              snowdreamtech/qbittorrent:4.6
-              snowdreamtech/qbittorrent:4
-              ghcr.io/snowdreamtech/qbittorrent:latest
-              ghcr.io/snowdreamtech/qbittorrent:4.6.5
-              ghcr.io/snowdreamtech/qbittorrent:4.6
-              ghcr.io/snowdreamtech/qbittorrent:4
+              snowdreamtech/qbittorrent:flood-latest
+              snowdreamtech/qbittorrent:flood-4.6.5
+              snowdreamtech/qbittorrent:flood-4.6
+              snowdreamtech/qbittorrent:flood-4
+              ghcr.io/snowdreamtech/qbittorrent:flood-latest
+              ghcr.io/snowdreamtech/qbittorrent:flood-4.6.5
+              ghcr.io/snowdreamtech/qbittorrent:flood-4.6
+              ghcr.io/snowdreamtech/qbittorrent:flood-4
              

@@ -19,7 +19,9 @@ docker run -d \
   -e WEBUI_PASS=admin \
   -e WEBUI_PORT=8080 \
   -e TORRENTING_PORT=6881 \
+  -e FLOOD_PORT=3000 \
   -p 8080:8080 \
+  -p 3000:3000 \
   -p 6881:6881 \
   -p 6881:6881/udp \
   -v /path/to/config:/var/lib/qBittorrent/config \
@@ -27,7 +29,7 @@ docker run -d \
   -v /path/to/incomplete:/var/lib/qBittorrent/incomplete  \
   -v /path/to/torrents:/var/lib/qBittorrent/torrents  \
   --restart unless-stopped \
-  snowdreamtech/qbittorrent:latest
+  snowdreamtech/qbittorrent:flood-latest
 ```
 
 ## Docker Compose
@@ -37,7 +39,7 @@ version: "3"
 
 services:
   qBittorrent:
-    image: snowdreamtech/qbittorrent:latest
+    image: snowdreamtech/qbittorrent:flood-latest
     container_name: qBittorrent
     environment:
       - TZ=Etc/UTC 
@@ -46,6 +48,7 @@ services:
       - WEBUI_PASS=admin 
       - WEBUI_PORT=8080 
       - TORRENTING_PORT=6881 
+      - FLOOD_PORT=3000 
     volumes:
       - /path/to/config:/var/lib/qBittorrent/config #optional
       - /path/to/downloads:/var/lib/qBittorrent/downloads 
@@ -53,6 +56,7 @@ services:
       - /path/to/torrents:/var/lib/qBittorrent/torrents 
     ports:
       - 8080:8080
+      - 3000:3000
       - 6881:6881
       - 6881:6881/udp
     restart: unless-stopped
