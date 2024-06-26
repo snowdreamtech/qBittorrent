@@ -5,10 +5,20 @@ set -e
 if [ -n "${WEBUI_USER}" ] && [ -n "${WEBUI_PASS}" ]; then
     # username
     sed -i "s/WebUI\\\Username.*/WebUI\\\Username=${WEBUI_USER}/g" /var/lib/qBittorrent/config/qBittorrent.conf
-
+    
     # password
-    HASH=$(python3 /var/lib/qBittorrent/bin/passwd.py "${WEBUI_PASS}")
-    sed -i "s/WebUI\\\Password_PBKDF2.*/WebUI\\\Password_PBKDF2=${HASH}/g" /var/lib/qBittorrent/config/qBittorrent.conf
+    # HASH=$(python3 /var/lib/qBittorrent/bin/passwd.py "${WEBUI_PASS}")
+    # HASH=$(sh /var/lib/qBittorrent/bin/passwd.sh "${WEBUI_PASS}")
+    HASH=$(/var/lib/qBittorrent/bin/passwd "${WEBUI_PASS}")
+    
+    sed -i "s|WebUI\\\Password_PBKDF2.*|WebUI\\\Password_PBKDF2=${HASH}|g" /var/lib/qBittorrent/config/qBittorrent.conf
+else
+    # username
+    sed -i "s/WebUI\\\Username.*/WebUI\\\Username=admin/g" /var/lib/qBittorrent/config/qBittorrent.conf
+    
+    # password
+    HASH=""
+    sed -i "s/WebUI\\\Password_PBKDF2.*/WebUI\\\Password_PBKDF2=\"${HASH}\"/g" /var/lib/qBittorrent/config/qBittorrent.conf
 fi
 
 # set WEBUI_LANG

@@ -1,3 +1,17 @@
+FROM snowdreamtech/golang:1.22.4 AS builder
+
+ENV QBT_PW_GEN_VERSION 1.0.2
+
+RUN mkdir /workspace
+WORKDIR /workspace
+RUN wget https://github.com/saltydk/qbt_pw_gen/archive/refs/tags/v${QBT_PW_GEN_VERSION}.tar.gz \ 
+    && tar zxvf v${QBT_PW_GEN_VERSION}.tar.gz \ 
+    && cd qbt_pw_gen-${QBT_PW_GEN_VERSION} \ 
+    && go build -o passwd \
+    && cp passwd ../
+
+
+
 FROM snowdreamtech/alpine:3.20.0
 
 LABEL maintainer="snowdream <sn0wdr1am@qq.com>"
@@ -20,7 +34,7 @@ RUN apk add --no-cache qbittorrent-nox python3 \
 
 COPY config /var/lib/qBittorrent/config
 
-COPY bin /var/lib/qBittorrent/bin
+COPY --from=builder /workspace/passwd /var/lib/qBittorrent/bin
 
 EXPOSE 8080 6881/tcp 6881/udp
 
