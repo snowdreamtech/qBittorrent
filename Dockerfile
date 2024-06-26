@@ -22,13 +22,13 @@ ENV WEBUI_PORT=8080 \
     WEBUI_PASS="" \
     WEBUI_LANG="en" 
 
-RUN apk add --no-cache qbittorrent-nox python3 \
+RUN apk add --no-cache qbittorrent-nox \
     openssl \
-    && mkdir -p /var/lib/qBittorrent/bin/  \
-    && mkdir -p /var/lib/qBittorrent/config/  \
-    && mkdir -p /var/lib/qBittorrent/downloads/  \
-    && mkdir -p /var/lib/qBittorrent/incomplete/  \
-    && mkdir -p /var/lib/qBittorrent/torrents/  \
+    && mkdir -p /var/lib/qBittorrent/bin/ \
+    && mkdir -p /var/lib/qBittorrent/config/ \
+    && mkdir -p /var/lib/qBittorrent/downloads/ \
+    && mkdir -p /var/lib/qBittorrent/incomplete/ \
+    && mkdir -p /var/lib/qBittorrent/torrents/ \
     && chown -R  qbittorrent:qbittorrent /var/lib/qBittorrent \
     && rm -rfv /var/lib/qbittorrent  
 
