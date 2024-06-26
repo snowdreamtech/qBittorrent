@@ -9,7 +9,7 @@ on:
   workflow_dispatch:
 jobs:
     buildx:
-      runs-on: macOS
+      runs-on: [self-hosted linux]
       steps:
         -
           name: Checkout
