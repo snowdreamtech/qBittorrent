@@ -24,7 +24,6 @@ ENV FLOOD_PORT=3000 \
     WEBUI_LANG="en" 
 
 RUN apk add --no-cache qbittorrent-nox \
-    python3 \
     openssl \
     nodejs \
     npm \
