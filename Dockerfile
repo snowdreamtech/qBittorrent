@@ -1,3 +1,17 @@
+FROM snowdreamtech/golang:1.22.4 AS builder
+
+ARG QBT_PW_GEN_VERSION 1.0.2
+
+RUN mkdir /workspace
+WORKDIR /workspace
+RUN wget https://github.com/saltydk/qbt_pw_gen/archive/refs/tags/v${QBT_PW_GEN_VERSION}.tar.gz \ 
+    && tar zxvf v${QBT_PW_GEN_VERSION}.tar.gz \ 
+    && cd qbt_pw_gen-${QBT_PW_GEN_VERSION} \ 
+    && go build -o passwd \
+    && cp passwd ../
+
+
+
 FROM snowdreamtech/alpine:3.20.0
 
 LABEL maintainer="snowdream <sn0wdr1am@qq.com>"
@@ -14,18 +28,18 @@ RUN apk add --no-cache qbittorrent-nox \
     openssl \
     nodejs \
     npm \
-    && mkdir -p /var/lib/qBittorrent/bin/  \
-    && mkdir -p /var/lib/qBittorrent/config/  \
-    && mkdir -p /var/lib/qBittorrent/downloads/  \
-    && mkdir -p /var/lib/qBittorrent/incomplete/  \
-    && mkdir -p /var/lib/qBittorrent/torrents/  \
+    && mkdir -p /var/lib/qBittorrent/bin/ \
+    && mkdir -p /var/lib/qBittorrent/config/ \
+    && mkdir -p /var/lib/qBittorrent/downloads/ \
+    && mkdir -p /var/lib/qBittorrent/incomplete/ \
+    && mkdir -p /var/lib/qBittorrent/torrents/ \
     && chown -R  qbittorrent:qbittorrent /var/lib/qBittorrent \
     && rm -rfv /var/lib/qbittorrent \
     && npm install --global flood
 
 COPY config /var/lib/qBittorrent/config
 
-COPY bin /var/lib/qBittorrent/bin
+COPY --from=builder /workspace/passwd /var/lib/qBittorrent/bin
 
 EXPOSE 3000 8080 6881/tcp 6881/udp
 
