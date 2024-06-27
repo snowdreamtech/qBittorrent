@@ -4,7 +4,11 @@ ENV QBT_PW_GEN_VERSION 1.0.2
 
 RUN mkdir /workspace
 WORKDIR /workspace
-RUN wget https://github.com/saltydk/qbt_pw_gen/archive/refs/tags/v${QBT_PW_GEN_VERSION}.tar.gz \ 
+RUN apk add --no-cache wget \
+    openssl \
+    ca-certificates \
+    && update-ca-certificates \
+    && wget https://github.com/saltydk/qbt_pw_gen/archive/refs/tags/v${QBT_PW_GEN_VERSION}.tar.gz \ 
     && tar zxvf v${QBT_PW_GEN_VERSION}.tar.gz \ 
     && cd qbt_pw_gen-${QBT_PW_GEN_VERSION} \ 
     && go build -o passwd \
@@ -26,8 +30,11 @@ ENV FLOOD_AUTH=default \
 
 RUN apk add --no-cache qbittorrent-nox \
     openssl \
+    ca-certificates \
+    wget \
     nodejs \
     npm \
+    && update-ca-certificates \
     && mkdir -p /var/lib/qBittorrent/bin/ \
     && mkdir -p /var/lib/qBittorrent/config/ \
     && mkdir -p /var/lib/qBittorrent/downloads/ \
