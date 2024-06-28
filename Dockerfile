@@ -1,6 +1,6 @@
 FROM snowdreamtech/golang:1.22.4 AS builder
 
-ENV QBT_PW_GEN_VERSION 1.0.2
+ENV QBT_PW_GEN_VERSION=1.0.2
 
 RUN mkdir /workspace
 WORKDIR /workspace
