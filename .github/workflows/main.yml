@@ -53,11 +53,11 @@ jobs:
             push: true
             tags: |
               snowdreamtech/qbittorrent:latest
-              snowdreamtech/qbittorrent:4.6.5
+              snowdreamtech/qbittorrent:4.6.4
               snowdreamtech/qbittorrent:4.6
               snowdreamtech/qbittorrent:4
               ghcr.io/snowdreamtech/qbittorrent:latest
-              ghcr.io/snowdreamtech/qbittorrent:4.6.5
+              ghcr.io/snowdreamtech/qbittorrent:4.6.4
               ghcr.io/snowdreamtech/qbittorrent:4.6
               ghcr.io/snowdreamtech/qbittorrent:4
              

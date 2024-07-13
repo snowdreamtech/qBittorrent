@@ -22,7 +22,7 @@ ENV WEBUI_PORT=8080 \
     WEBUI_PASS="" \
     WEBUI_LANG="en" 
 
-RUN apk add --no-cache qbittorrent-nox \
+RUN apk add --no-cache qbittorrent-nox=4.6.4-r1 \
     openssl \
     && mkdir -p /var/lib/qBittorrent/bin/ \
     && mkdir -p /var/lib/qBittorrent/config/ \
