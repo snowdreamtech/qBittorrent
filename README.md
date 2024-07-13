@@ -10,6 +10,27 @@ To help you get started creating a container from this image you can either use 
 
 ## Docker Cli
 
+### Simple
+
+```bash
+docker run -d \
+  --name=qBittorrent \
+  -e TZ=Etc/UTC \
+  -e WEBUI_LANG=en \
+  -e WEBUI_USER=admin \
+  -e WEBUI_PASS=admin \
+  -p 8080:8080 \
+  -p 6881:6881 \
+  -p 6881:6881/udp \
+  -v /path/to/downloads:/var/lib/qBittorrent/downloads  \
+  -v /path/to/incomplete:/var/lib/qBittorrent/incomplete  \
+  -v /path/to/torrents:/var/lib/qBittorrent/torrents  \
+  --restart unless-stopped \
+  snowdreamtech/qbittorrent:latest
+```
+
+### Advance
+
 ```bash
 docker run -d \
   --name=qBittorrent \
@@ -32,6 +53,8 @@ docker run -d \
 
 ## Docker Compose
 
+### Simple
+
 ```bash
 version: "3"
 
@@ -40,17 +63,42 @@ services:
     image: snowdreamtech/qbittorrent:latest
     container_name: qBittorrent
     environment:
-      - TZ=Etc/UTC 
+      - TZ=Etc/UTC
       - WEBUI_LANG=en
       - WEBUI_USER=admin
-      - WEBUI_PASS=admin 
-      - WEBUI_PORT=8080 
-      - PEER_PORT=6881 
+      - WEBUI_PASS=admin
+    volumes:
+      - /path/to/downloads:/var/lib/qBittorrent/downloads
+      - /path/to/incomplete:/var/lib/qBittorrent/incomplete
+      - /path/to/torrents:/var/lib/qBittorrent/torrents
+    ports:
+      - 8080:8080
+      - 6881:6881
+      - 6881:6881/udp
+    restart: unless-stopped
+```
+
+### Advance
+
+```bash
+version: "3"
+
+services:
+  qBittorrent:
+    image: snowdreamtech/qbittorrent:latest
+    container_name: qBittorrent
+    environment:
+      - TZ=Etc/UTC
+      - WEBUI_LANG=en
+      - WEBUI_USER=admin
+      - WEBUI_PASS=admin
+      - WEBUI_PORT=8080
+      - PEER_PORT=6881
     volumes:
       - /path/to/config:/var/lib/qBittorrent/config #optional
-      - /path/to/downloads:/var/lib/qBittorrent/downloads 
-      - /path/to/incomplete:/var/lib/qBittorrent/incomplete 
-      - /path/to/torrents:/var/lib/qBittorrent/torrents 
+      - /path/to/downloads:/var/lib/qBittorrent/downloads
+      - /path/to/incomplete:/var/lib/qBittorrent/incomplete
+      - /path/to/torrents:/var/lib/qBittorrent/torrents
     ports:
       - 8080:8080
       - 6881:6881
