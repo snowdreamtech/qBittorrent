@@ -28,7 +28,7 @@ ENV PEER_PORT=6881 \
     WEBUI_PASS="" \
     WEBUI_LANG="en" 
 
-RUN apk add --no-cache qbittorrent-nox \
+RUN apk add --no-cache qbittorrent-nox=4.6.4-r1 \
     openssl \
     ca-certificates \
     wget \
