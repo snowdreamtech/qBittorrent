@@ -53,11 +53,11 @@ jobs:
             push: true
             tags: |
               snowdreamtech/qbittorrent:flood-latest
-              snowdreamtech/qbittorrent:flood-4.6.5
+              snowdreamtech/qbittorrent:flood-4.6.4
               snowdreamtech/qbittorrent:flood-4.6
               snowdreamtech/qbittorrent:flood-4
               ghcr.io/snowdreamtech/qbittorrent:flood-latest
-              ghcr.io/snowdreamtech/qbittorrent:flood-4.6.5
+              ghcr.io/snowdreamtech/qbittorrent:flood-4.6.4
               ghcr.io/snowdreamtech/qbittorrent:flood-4.6
               ghcr.io/snowdreamtech/qbittorrent:flood-4
              
