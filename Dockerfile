@@ -20,11 +20,11 @@ FROM snowdreamtech/alpine:3.20.0
 
 LABEL maintainer="snowdream <sn0wdr1am@qq.com>"
 
-ENV FLOOD_AUTH=default \
+ENV PEER_PORT=6881 \
+    FLOOD_AUTH=default \
     FLOOD_PORT=3000 \
     WEBUI_PORT=8080 \
-    PEER_PORT=6881 \
-    WEBUI_USER="" \
+    WEBUI_USER="admin" \
     WEBUI_PASS="" \
     WEBUI_LANG="en" 
 
