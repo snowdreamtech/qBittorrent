@@ -16,9 +16,9 @@ FROM snowdreamtech/alpine:3.20.0
 
 LABEL maintainer="snowdream <sn0wdr1am@qq.com>"
 
-ENV WEBUI_PORT=8080 \
-    PEER_PORT=6881 \
-    WEBUI_USER="" \
+ENV PEER_PORT=6881 \
+    WEBUI_PORT=8080 \
+    WEBUI_USER="admin" \
     WEBUI_PASS="" \
     WEBUI_LANG="en" 
 
