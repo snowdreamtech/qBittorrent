@@ -29,9 +29,9 @@ if [ -n "${WEBUI_PORT}" ]; then
     sed -i "s/WebUI\\\Port.*/WebUI\\\Port=${WEBUI_PORT}/g" /var/lib/qBittorrent/config/qBittorrent.conf
 fi
 
-# set TORRENTING_PORT
-if [ -n "${TORRENTING_PORT}" ]; then
-    sed -i "s/Session\\\Port.*/Session\\\Port=${TORRENTING_PORT}/g" /var/lib/qBittorrent/config/qBittorrent.conf
+# set PEER_PORT
+if [ -n "${PEER_PORT}" ]; then
+    sed -i "s/Session\\\Port.*/Session\\\Port=${PEER_PORT}/g" /var/lib/qBittorrent/config/qBittorrent.conf
 fi
 
 # qbittorrent-nox 
