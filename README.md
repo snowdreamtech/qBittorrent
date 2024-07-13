@@ -18,7 +18,7 @@ docker run -d \
   -e WEBUI_USER=admin \
   -e WEBUI_PASS=admin \
   -e WEBUI_PORT=8080 \
-  -e TORRENTING_PORT=6881 \
+  -e PEER_PORT=6881 \
   -e FLOOD_PORT=3000 \
   -p 8080:8080 \
   -p 3000:3000 \
@@ -47,7 +47,7 @@ services:
       - WEBUI_USER=admin
       - WEBUI_PASS=admin 
       - WEBUI_PORT=8080 
-      - TORRENTING_PORT=6881 
+      - PEER_PORT=6881 
       - FLOOD_PORT=3000 
     volumes:
       - /path/to/config:/var/lib/qBittorrent/config #optional
