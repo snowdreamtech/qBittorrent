@@ -5,15 +5,15 @@ set -e
 if [ -n "${WEBUI_USER}" ] && [ -n "${WEBUI_PASS}" ]; then
     # username
     sed -i "s/WebUI\\\Username.*/WebUI\\\Username=${WEBUI_USER}/g" /var/lib/qBittorrent/config/qBittorrent.conf
-    
+
     # password
     HASH=$(/var/lib/qBittorrent/bin/passwd "${WEBUI_PASS}")
-    
+
     sed -i "s|WebUI\\\Password_PBKDF2.*|WebUI\\\Password_PBKDF2=${HASH}|g" /var/lib/qBittorrent/config/qBittorrent.conf
 else
     # username
     sed -i "s/WebUI\\\Username.*/WebUI\\\Username=admin/g" /var/lib/qBittorrent/config/qBittorrent.conf
-    
+
     # password
     HASH=""
     sed -i "s/WebUI\\\Password_PBKDF2.*/WebUI\\\Password_PBKDF2=\"${HASH}\"/g" /var/lib/qBittorrent/config/qBittorrent.conf
@@ -36,9 +36,9 @@ fi
 
 # flood
 if [ "${FLOOD_AUTH}" == "default" ]; then
-    flood --host 0.0.0.0 --port "${FLOOD_PORT}" --auth default --qburl "http://localhost:${WEBUI_PORT}" --qbuser "${WEBUI_USER}" --qbpass "${WEBUI_PASS}" > /dev/null 2>&1 &
+    flood --host 0.0.0.0 --port "${FLOOD_PORT}" --auth default --qburl "http://localhost:${WEBUI_PORT}" --qbuser "${WEBUI_USER}" --qbpass "${WEBUI_PASS}" >/dev/null 2>&1 &
 else
-    flood --host 0.0.0.0 --port "${FLOOD_PORT}" --auth none --qburl "http://localhost:${WEBUI_PORT}" --qbuser "${WEBUI_USER}" --qbpass "${WEBUI_PASS}" > /dev/null 2>&1 &
+    flood --host 0.0.0.0 --port "${FLOOD_PORT}" --auth none --qburl "http://localhost:${WEBUI_PORT}" --qbuser "${WEBUI_USER}" --qbpass "${WEBUI_PASS}" >/dev/null 2>&1 &
 fi
 
 # qbittorrent-nox
