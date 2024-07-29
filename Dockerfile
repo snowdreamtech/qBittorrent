@@ -16,7 +16,7 @@ RUN apk add --no-cache wget \
 
 
 
-FROM snowdreamtech/alpine:3.20.0
+FROM snowdreamtech/alpine:3.20.2
 
 LABEL maintainer="snowdream <sn0wdr1am@qq.com>"
 
