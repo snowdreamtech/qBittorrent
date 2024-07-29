@@ -12,7 +12,7 @@ RUN wget https://github.com/saltydk/qbt_pw_gen/archive/refs/tags/v${QBT_PW_GEN_V
 
 
 
-FROM snowdreamtech/alpine:3.20.0
+FROM snowdreamtech/alpine:3.20.2
 
 LABEL maintainer="snowdream <sn0wdr1am@qq.com>"
 
