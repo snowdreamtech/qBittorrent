@@ -10,7 +10,7 @@ RUN wget https://github.com/saltydk/qbt_pw_gen/archive/refs/tags/v${QBT_PW_GEN_V
 
 
 
-FROM snowdreamtech/debian:12.8.0
+FROM snowdreamtech/node:18.19.0-bookworm
 
 # OCI annotations to image
 LABEL org.opencontainers.image.authors="Snowdream Tech" \
@@ -42,6 +42,9 @@ ENV QBITTORRENT_VERSION=4.5.2-3+deb12u1 \
     WEBUI_USER="" \
     WEBUI_PASS="" \
     WEBUI_LANG="en" 
+
+ENV FLOOD_AUTH=none \
+    FLOOD_PORT=3000 
 
 ARG GID=1000 \
     UID=1000  \
@@ -97,14 +100,16 @@ RUN set -eux \
 COPY --chown=${USER}:${USER} config /var/lib/qBittorrent/config
 
 COPY --chown=${USER}:${USER} --from=builder /home/go/passwd /var/lib/qBittorrent/bin
-        
+
+RUN npm install --global flood
+       
 # Switch to the user
 USER ${USER}
 
 # Set the workdir
 WORKDIR ${WORKDIR}
 
-EXPOSE 8080 25413/tcp 25413/udp
+EXPOSE 3000 8080 25413/tcp 25413/udp
 
 COPY --chown=${USER}:${USER} docker-entrypoint.sh /usr/local/bin/
 
