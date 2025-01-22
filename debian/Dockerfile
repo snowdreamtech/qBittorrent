@@ -46,8 +46,8 @@ ENV QBITTORRENT_VERSION=4.5.2-3+deb12u1 \
 ENV FLOOD_AUTH=none \
     FLOOD_PORT=3000 
 
-ARG GID=1000 \
-    UID=1000  \
+ARG GID=1001 \
+    UID=1001  \
     USER=qbittorrent \
     WORKDIR=/var/lib/qBittorrent
 
